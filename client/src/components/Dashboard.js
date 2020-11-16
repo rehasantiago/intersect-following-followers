@@ -106,7 +106,7 @@ class Dashboard extends Component {
             <div className="container" style={{ marginTop: "5%" }}>
                 <div className="row forms">
                     <div className="col s8">
-                        <form noValidate onSubmit={this.onSubmit}>
+                        <form onSubmit={this.onSubmit}>
                             <div className="input-field col s12">
                                 <input
                                     onChange={this.onChange}
@@ -114,6 +114,7 @@ class Dashboard extends Component {
                                     error={errors.user1}
                                     id="user1"
                                     type="text"
+                                    required
                                 />
                                 <label htmlFor="user1">Primary User</label>
                                 <span style={{ color: "red" }}>{errors.user1}</span>
@@ -125,6 +126,7 @@ class Dashboard extends Component {
                                     error={errors.user2}
                                     id="user2"
                                     type="text"
+                                    required
                                 />
                                 <label htmlFor="user2">Secondary User</label>
                                 <span style={{ color: "red" }}>{errors.user2}</span>
