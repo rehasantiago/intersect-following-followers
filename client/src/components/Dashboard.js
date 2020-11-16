@@ -33,7 +33,7 @@ class Dashboard extends Component {
             let isUserPresent1 = await axios.post(`${URL}/user`, { user: this.state.user1 });
             isUserPresent1 = isUserPresent1.data;
             console.log(isUserPresent1)
-            if(this.state.user1){
+            if (this.state.user1) {
                 this.setState((prevState) => {
                     return {
                         ...prevState,
@@ -42,12 +42,12 @@ class Dashboard extends Component {
                             user1: isUserPresent1.message
                         }
                     }
-    
+
                 })
             }
-            
-            
-            if(this.state.user2){
+
+
+            if (this.state.user2) {
                 let isUserPresent2 = await axios.post(`${URL}/user`, { user: this.state.user2 });
                 isUserPresent2 = isUserPresent2.data;
                 console.log(isUserPresent2);
@@ -59,7 +59,7 @@ class Dashboard extends Component {
                             user2: isUserPresent2.message
                         }
                     }
-    
+
                 })
                 console.log(this.state);
             }
@@ -77,13 +77,13 @@ class Dashboard extends Component {
         this.delayedCallback();
     };
 
-    onSubmit = async(e) => {
+    onSubmit = async (e) => {
         e.preventDefault();
         let result = await axios.post(`${URL}/get-users`, {
             user1: this.state.user1, user2: this.state.user2
         })
         result = result.data;
-        if(result.success){
+        if (result.success) {
             this.setState({
                 result: result.users
             })
@@ -103,7 +103,7 @@ class Dashboard extends Component {
     render() {
         const { errors, result } = this.state;
         return (
-            <div className="container">
+            <div className="container" style={{ marginTop: "5%" }}>
                 <div className="row forms">
                     <div className="col s8">
                         <form noValidate onSubmit={this.onSubmit}>
@@ -131,41 +131,44 @@ class Dashboard extends Component {
                             </div>
 
                             <div className="col s12" style={{}}>
-                                <button
+                                <center><button
                                     type="submit"
                                     className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                                     disabled={this.state.errors.user1 || this.state.errors.user2}
                                 >
                                     Submit
-                            </button>
+                            </button></center>
                                 <br />
                             </div>
                         </form>
                         {result && result.length && (
-                            <table>
-                            <thead>
-                              <tr>
-                                  <th>ID</th>
-                                  <th>Name</th>
-                                  <th>HTML URL</th>
-                              </tr>
-                            </thead>
-                    
-                            <tbody>
-                              {
-                                  result.map((user) => {
-                                      console.log(user)
-                                      return (
-                                          <tr key={user.id}>
-                                              <td>{user.id}</td>
-                                              <td>{user.login}</td>
-                                              <td><a href={user.html_url}>{user.html_url}</a></td> 
-                                          </tr>
-                                      )
-                                  })
-                              }
-                            </tbody>
-                          </table>
+                            <center><table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>HTML URL</th>
+                                        <th>Node Id</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {
+                                        result.map((user) => {
+                                            console.log(user)
+                                            return (
+                                                <tr key={user.id}>
+                                                    <td>{user.id}</td>
+                                                    <td>{user.login}</td>
+                                                    <td><a href={user.html_url}>{user.html_url}</a></td>
+                                                    <td>{user.node_id}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table></center>
                         )}
                     </div>
                 </div>
